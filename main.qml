@@ -3,6 +3,8 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 
 Window {
+    property var isAltOn: false
+
     id: mainWindow
     width: 640
     height: 480
@@ -48,6 +50,7 @@ Window {
                     leftPadding: 10
                     rightPadding: 5
                     bottomPadding: 5
+                    width: parent.width - searchIcon.width - leftPadding - rightPadding
                     focus: true
                     font.pixelSize: 25
                     horizontalAlignment : TextInput.AlignVCenter
@@ -71,7 +74,7 @@ Window {
             radius: 10
             color: "#FFFFCC"
 
-            Text {
+            TextEdit {
                 id: outputText
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
@@ -82,8 +85,11 @@ Window {
                 anchors.rightMargin: 20
                 anchors.bottomMargin: 10
                 font.pixelSize: 22
+                readOnly: true
                 wrapMode: Text.Wrap
-                textFormat: Text.StyledText
+                textFormat: TextEdit.RichText
+                selectByMouse: true
+                mouseSelectionMode: TextEdit.SelectCharacters
             }
         }
 
@@ -98,6 +104,38 @@ Window {
                 mainWindow.hide()
                 mainWindow.x = (Screen.desktopAvailableWidth - width) / 2
                 mainWindow.y = (Screen.desktopAvailableHeight - height) / 2
+                textInput.selectAll()
+                mainWindow.show()
+            }
+        }
+
+        Connections {
+            target: gsf
+            onAlt4A: {
+                mainWindow.hide()
+                mainWindow.x = (Screen.desktopAvailableWidth - width) / 2
+                mainWindow.y = (Screen.desktopAvailableHeight - height) / 2
+                textInput.selectAll()
+                textInput.paste()
+                mainWindow.show()
+             }
+        }
+
+        Connections {
+            target: gsf
+            onAlt4Z: {
+                process.xclip_o_sel();
+             }
+        }
+
+        Connections {
+            target: process
+            onXclip_o_sel_finished: {
+                mainWindow.hide()
+                mainWindow.x = (Screen.desktopAvailableWidth - width) / 2
+                mainWindow.y = (Screen.desktopAvailableHeight - height) / 2
+                textInput.text = word;
+                textInput.editingFinished();
                 mainWindow.show()
             }
         }
@@ -107,11 +145,18 @@ Window {
             mainWindow.requestActivate()
         }
 
+        Keys.onTabPressed: {
+            textInput.selectAll()
+            textInput.focus = true;
+        }
+
+        Keys.onReleased: isAltOn = false;
+
         Shortcut {
              sequence: "Ctrl+Q"
              context: Qt.ApplicationShortcut
              onActivated: Qt.quit()
-         }
+        }
     }
 
     function bingDictionary(text) {
@@ -184,7 +229,7 @@ Window {
         }
 
         var text = `<h1><b>${word}</b></h1>`;
-        text += '<br>';
+        text += '<p></p>';
         text += '<b>';
         if (pronunciation.length > 0)
             text += `<p>${pronunciation}</p>`;

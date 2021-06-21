@@ -13,6 +13,7 @@ SOURCES += \
         globalshortcutforward.cpp \
         https.cpp \
         main.cpp \
+        process.cpp \
         qglobalshortcut/qglobalshortcut.cc
 
 RESOURCES += qml.qrc
@@ -20,6 +21,7 @@ RESOURCES += qml.qrc
 HEADERS += \
     globalshortcutforward.h \
     https.h \
+    process.h \
     qglobalshortcut/qglobalshortcut.h
 
 win32:SOURCES += qglobalshortcut/qglobalshortcut_win.cc

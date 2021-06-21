@@ -35,6 +35,7 @@ build
 *.rc
 /.qmake.cache
 /.qmake.stash
+xclip
 
 # qtcreator generated files
 *.pro.user*

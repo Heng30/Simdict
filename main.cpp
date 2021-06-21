@@ -1,11 +1,12 @@
 #include <QGuiApplication>
 #include <QQmlContext>
 #include <QQmlApplicationEngine>
+#include <QVector>
 
 #include "https.h"
 #include "qglobalshortcut.h"
 #include "globalshortcutforward.h"
-
+#include "process.h"
 
 int main(int argc, char *argv[])
 {
@@ -13,10 +14,14 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-    QGlobalShortcut gs;
-    gs.setKey(QKeySequence("Alt+S"));
     GlobalShortcutForward gsf;
-    QObject::connect(&gs, SIGNAL(activated()), &gsf, SLOT(onAlt2S()));
+    QGlobalShortcut gs_S, gs_A, gs_Z;
+    gs_S.setKey(QKeySequence("Alt+S")); // show
+    gs_A.setKey(QKeySequence("Alt+A")); // clipboard
+    gs_Z.setKey(QKeySequence("Alt+Z")); // under cursor world
+    QObject::connect(&gs_S, SIGNAL(activated()), &gsf, SLOT(onAlt2S()));
+    QObject::connect(&gs_A, SIGNAL(activated()), &gsf, SLOT(onAlt2A()));
+    QObject::connect(&gs_Z, SIGNAL(activated()), &gsf, SLOT(onAlt2Z()));
 
     QQmlApplicationEngine engine;
     engine.setOfflineStoragePath(app.applicationDirPath());
@@ -24,6 +29,7 @@ int main(int argc, char *argv[])
     QQmlContext *context = engine.rootContext();
     context->setContextProperty("gsf", &gsf);
     context->setContextProperty("https", new Https());
+    context->setContextProperty("process", new Process());
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
