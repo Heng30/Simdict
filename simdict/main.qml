@@ -79,7 +79,7 @@ Window {
                             text += '<p>Author: Heng</p>'
                             text += '<p>Blog: heng30.space</p>'
                             text += '<p>Email: 2238288979@qq.com</P>'
-                            text += '<p>Github: github.com/Heng30/Simdict</p>'
+                            text += '<p>Github: github.com/Heng30/simdict</p>'
                             text += '<p>Dogecoin: D8Ng7dd7uT3fQ3eD33biyRfiULntb6CTu3</p>'
                             text += '</b>'
                             outputText.text = text
