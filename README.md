@@ -1,4 +1,4 @@
-### Dictionary
+### simdict
 
 ### 功能
 - https://cn.bing.com/dict 翻译功能
