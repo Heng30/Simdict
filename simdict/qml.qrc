@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>image/search.png</file>
+        <file>image/about.png</file>
+        <file>favicon.ico</file>
     </qresource>
 </RCC>

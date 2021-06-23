@@ -6,18 +6,21 @@ Window {
     property var isAltOn: false
 
     id: mainWindow
-    width: 640
-    height: 480
+    width: 700
+    height: 500
     visible: true
     flags: Qt.Dialog
     x: (Screen.desktopAvailableWidth - width) / 2
     y: (Screen.desktopAvailableHeight - height) / 2
-    title: qsTr("dectionary")
+    title: qsTr("Simdict")
 
     Rectangle {
         id: topLayout
         anchors.fill: parent
-        color: "lightgray"
+        color: "lightblue"
+        border.color: "lightgreen"
+        border.width: 3
+        radius: 10
 
         Rectangle {
             id: textLayout
@@ -33,30 +36,56 @@ Window {
             radius: 10
             color: "white"
 
-            Row {
-                anchors.fill: parent
-                width: parent.width
+            Image {
+                id: searchIcon
+                anchors.left: parent.left
+                width: parent.height
                 height: parent.height
+                source: "qrc:/image/search.png"
 
-                Image {
-                    id: searchIcon
-                    width: parent.height
-                    height: parent.height
-                    source: "qrc:/image/search.png"
-                }
-
-                TextInput {
-                    id: textInput
-                    leftPadding: 10
-                    rightPadding: 5
-                    bottomPadding: 5
-                    width: parent.width - searchIcon.width - leftPadding - rightPadding
-                    focus: true
-                    font.pixelSize: 25
-                    horizontalAlignment : TextInput.AlignVCenter
-                    onEditingFinished: bingDictionary(text)
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: textInput.editingFinished()
                 }
             }
+
+            TextInput {
+                id: textInput
+                anchors.left: searchIcon.right
+                leftPadding: 10
+                rightPadding: 5
+                bottomPadding: 5
+                width: parent.width - searchIcon.width - aboutIcon.width - leftPadding - rightPadding
+                focus: true
+                font.pixelSize: 25
+                selectByMouse: true
+                horizontalAlignment : TextInput.AlignVCenter
+                onEditingFinished: bingDictionary(text)
+            }
+
+            Image {
+                    id: aboutIcon
+                    anchors.right: parent.right
+                    width: parent.height
+                    height: parent.height
+                    source: "qrc:/image/about.png"
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            var text = '<h1>simdict v1.1.0</h1>'
+                            text += '<p></p>'
+                            text += '<b>'
+                            text += '<p>Author: Heng</p>'
+                            text += '<p>Blog: heng30.space</p>'
+                            text += '<p>Email: 2238288979@qq.com</P>'
+                            text += '<p>Github: github.com/Heng30/Simdict</p>'
+                            text += '<p>Dogecoin: D8Ng7dd7uT3fQ3eD33biyRfiULntb6CTu3</p>'
+                            text += '</b>'
+                            outputText.text = text
+                        }
+                    }
+                }
         }
 
         Rectangle {

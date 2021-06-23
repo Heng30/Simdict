@@ -1,5 +1,9 @@
 #include "process.h"
 
+#ifdef Q_O_LINUX
+#include "xclip.h"
+#endif
+
 #include <QStringList>
 #include <QDebug>
 
@@ -25,6 +29,11 @@ void Process::readStdout()
 
 void Process::xclip_o_sel()
 {
+#ifdef Q_O_WINDOW
+    qDebug() << "no implementation";
+#elif defined (Q_O_LINUX)
+
+#ifndef NO_XCLIP_PROGRAM
     QString program = "xclip";
     QStringList arguments = {"-o", "-sel"};
 
@@ -34,4 +43,12 @@ void Process::xclip_o_sel()
             this, SLOT(showError(QProcess::ProcessError)));
     connect(m_process.data(), SIGNAL(readyReadStandardOutput()),
             this, SLOT(readStdout()));
+#else
+    char buf[1024] = {0};
+    size_t len = xclipSel(buf, 1024);
+    QString word = QString::fromUtf8(buf, len);
+    emit xclip_o_sel_finished(word);
+#endif // Q_O_LINUX
+
+#endif //Q_O_WINDOW
 }
