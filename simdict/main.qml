@@ -3,7 +3,7 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 
 Window {
-    property var isAltOn: false
+    property bool isAltOn: false
 
     id: mainWindow
     width: 700
@@ -124,12 +124,14 @@ Window {
 
         Connections {
             target: https
-            onGetContent: parseHtml(content)
+            function onGetContent(content) {
+                parseHtml(content)
+            }
         }
 
         Connections {
             target: gsf
-            onAlt4S: {
+            function onAlt4S() {
                 mainWindow.hide()
                 mainWindow.x = (Screen.desktopAvailableWidth - width) / 2
                 mainWindow.y = (Screen.desktopAvailableHeight - height) / 2
@@ -140,7 +142,7 @@ Window {
 
         Connections {
             target: gsf
-            onAlt4A: {
+            function onAlt4A() {
                 mainWindow.hide()
                 mainWindow.x = (Screen.desktopAvailableWidth - width) / 2
                 mainWindow.y = (Screen.desktopAvailableHeight - height) / 2
@@ -152,14 +154,14 @@ Window {
 
         Connections {
             target: gsf
-            onAlt4Z: {
+            function onAlt4Z() {
                 process.xclip_o_sel();
              }
         }
 
         Connections {
             target: process
-            onXclip_o_sel_finished: {
+            function onXclip_o_sel_finished() {
                 mainWindow.hide()
                 mainWindow.x = (Screen.desktopAvailableWidth - width) / 2
                 mainWindow.y = (Screen.desktopAvailableHeight - height) / 2

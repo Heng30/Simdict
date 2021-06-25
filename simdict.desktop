@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=Utility;
+Comment=simdict
+Exec=simdict
+Icon=simdict
+Name=simdict
+StartupNotify=true
+TryExec=simdict
+Type=Application
+
+# Translations
+Name[zh_CN]=simdict

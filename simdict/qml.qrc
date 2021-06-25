@@ -4,5 +4,6 @@
         <file>image/search.png</file>
         <file>image/about.png</file>
         <file>favicon.ico</file>
+        <file>../simdict.desktop</file>
     </qresource>
 </RCC>

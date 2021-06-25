@@ -40,7 +40,7 @@ void Https::onGetFinished()
     QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
     QByteArray replyContent = reply->readAll();
     reply->deleteLater();
-    getContent(replyContent);
+    emit getContent(replyContent);
 }
 
 

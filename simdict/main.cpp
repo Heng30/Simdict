@@ -7,6 +7,7 @@
 #include "qglobalshortcut.h"
 #include "globalshortcutforward.h"
 #include "process.h"
+#include "youdaoapi.h"
 
 int main(int argc, char *argv[])
 {
@@ -30,6 +31,7 @@ int main(int argc, char *argv[])
     context->setContextProperty("gsf", &gsf);
     context->setContextProperty("https", new Https());
     context->setContextProperty("process", new Process());
+    context->setContextProperty("youdaoapi", YoudaoAPI::instance());
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
