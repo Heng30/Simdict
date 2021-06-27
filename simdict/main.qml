@@ -155,18 +155,18 @@ Window {
         Connections {
             target: gsf
             function onAlt4Z() {
-                process.xclip_o_sel();
+                process.xclip_o_sel()
              }
         }
 
         Connections {
             target: process
-            function onXclip_o_sel_finished() {
+            function onXclip_o_sel_finished(word) {
                 mainWindow.hide()
                 mainWindow.x = (Screen.desktopAvailableWidth - width) / 2
                 mainWindow.y = (Screen.desktopAvailableHeight - height) / 2
-                textInput.text = word;
-                textInput.editingFinished();
+                textInput.text = word
+                textInput.editingFinished()
                 mainWindow.show()
             }
         }
@@ -178,10 +178,10 @@ Window {
 
         Keys.onTabPressed: {
             textInput.selectAll()
-            textInput.focus = true;
+            textInput.focus = true
         }
 
-        Keys.onReleased: isAltOn = false;
+        Keys.onReleased: isAltOn = false
 
         Shortcut {
              sequence: "Ctrl+Q"
