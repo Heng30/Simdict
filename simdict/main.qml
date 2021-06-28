@@ -81,6 +81,7 @@ Window {
                             text += '<p>Email: 2238288979@qq.com</P>'
                             text += '<p>Github: github.com/Heng30/simdict</p>'
                             text += '<p>Dogecoin: D8Ng7dd7uT3fQ3eD33biyRfiULntb6CTu3</p>'
+                            text += '<p>Dogecoin(BEP20): 0x0299D3B3479cdBd7Ced235dBAB58D3a72De81169</p>'
                             text += '</b>'
                             outputText.text = text
                         }
