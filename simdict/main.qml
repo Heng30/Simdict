@@ -125,14 +125,13 @@ Window {
 
         Connections {
             target: https
-            function onGetContent(content) {
-                parseHtml(content)
-            }
+            onGetContent: parseHtml(content)
+
         }
 
         Connections {
             target: gsf
-            function onAlt4S() {
+            onAlt4S: {
                 mainWindow.hide()
                 mainWindow.x = (Screen.desktopAvailableWidth - width) / 2
                 mainWindow.y = (Screen.desktopAvailableHeight - height) / 2
@@ -143,7 +142,7 @@ Window {
 
         Connections {
             target: gsf
-            function onAlt4A() {
+            onAlt4A: {
                 mainWindow.hide()
                 mainWindow.x = (Screen.desktopAvailableWidth - width) / 2
                 mainWindow.y = (Screen.desktopAvailableHeight - height) / 2
@@ -155,14 +154,13 @@ Window {
 
         Connections {
             target: gsf
-            function onAlt4Z() {
-                process.xclip_o_sel()
-             }
+            onAlt4Z: process.xclip_o_sel()
+
         }
 
         Connections {
             target: process
-            function onXclip_o_sel_finished(word) {
+            onXclip_o_sel_finished: {
                 mainWindow.hide()
                 mainWindow.x = (Screen.desktopAvailableWidth - width) / 2
                 mainWindow.y = (Screen.desktopAvailableHeight - height) / 2

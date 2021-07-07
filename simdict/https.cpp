@@ -1,5 +1,7 @@
 #include "https.h"
 
+#include <QDebug>
+
 Https::Https(QObject *parent)
     : QObject(parent),
       m_url(""),
