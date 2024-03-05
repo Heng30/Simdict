@@ -167,7 +167,7 @@ Window {
         }
 
         Connections {
-            function onXclip_o_sel_finished() {
+            function onXclip_o_sel_finished(word) {
                 mainWindow.hide();
                 mainWindow.x = (Screen.desktopAvailableWidth - width) / 2;
                 mainWindow.y = (Screen.desktopAvailableHeight - height) / 2;
