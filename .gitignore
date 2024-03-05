@@ -32,6 +32,7 @@ ui_*.h
 qrc_*.cpp
 Thumbs.db
 build
+bin
 *.res
 *.rc
 /.qmake.cache

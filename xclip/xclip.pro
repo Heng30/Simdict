@@ -3,7 +3,6 @@ TEMPLATE = lib
 CONFIG += static c++11
 
 DEFINES += HAVE_ICONV=1
-#LIBS += -lXmu -lX11
 
 CONFIG(debug, debug|release) {
     TARGET = xclipd
@@ -22,3 +21,8 @@ SOURCES += \
     xclib.c \
     xclip.c \
     xcprint.c
+
+MOC_DIR = $$PWD/../build/$$TARGET
+RCC_DIR = $$PWD/../build/$$TARGET
+DESTDIR = $$PWD/../build/$$TARGET
+OBJECTS_DIR = $$PWD/../build/$$TARGET
