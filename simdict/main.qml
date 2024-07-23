@@ -61,7 +61,7 @@ Window {
             anchors.top: topLayout.top
             anchors.left: topLayout.left
             width: parent.width - anchors.margins * 2
-            height: 35
+            height: 40
             anchors.margins: 2
 
             Image {
@@ -87,7 +87,7 @@ Window {
                 height: parent.height;
                 focus: true
                 clip: true
-                font.pixelSize: 25
+                font.pixelSize: 28
                 selectByMouse: true
                 verticalAlignment: TextInput.AlignVCenter
                 onEditingFinished: bingDictionary(text)
@@ -115,7 +115,7 @@ Window {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.margins: 25
-                font.pixelSize: 24
+                font.pixelSize: 28
                 readOnly: true
                 wrapMode: Text.Wrap
                 textFormat: TextEdit.RichText
