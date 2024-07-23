@@ -4,4 +4,5 @@ make clean
 rm ./Makefile
 rm ./simdict/Makefile
 rm ./xclip/Makefile
+rm clean
 
