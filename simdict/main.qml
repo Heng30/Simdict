@@ -5,8 +5,6 @@ import QtQuick.Window 2.12
 Window {
     id: mainWindow
 
-    property bool isAltOn: false
-
     function bingDictionary(text) {
         const bingPrefixUrl = "https://cn.bing.com/dict/search?q=";
         var url = bingPrefixUrl + text;
@@ -31,10 +29,16 @@ Window {
         outputText.text = list2[0];
     }
 
+    Component.onCompleted: {
+        const content = https.getSearchContent();
+        if (content != "")
+            bingDictionary(content);
+
+    }
     height: 360
     width: height * 1.618
     visible: true
-    flags: Qt.Dialog
+    flags: Qt.Dialog | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
     x: (Screen.desktopAvailableWidth - width) / 2
     y: (Screen.desktopAvailableHeight - height) / 2
     title: qsTr("simdict")
@@ -44,16 +48,13 @@ Window {
 
         anchors.fill: parent
         color: "lightblue"
-
         Keys.onEscapePressed: {
-            mainWindow.hide();
-            mainWindow.requestActivate();
+            Qt.quit();
         }
         Keys.onTabPressed: {
             textInput.selectAll();
             textInput.focus = true;
         }
-        Keys.onReleased: isAltOn = false
 
         Rectangle {
             id: textLayout
@@ -84,13 +85,14 @@ Window {
 
                 anchors.left: searchIcon.right
                 anchors.right: parent.right
-                height: parent.height;
+                height: parent.height
                 focus: true
                 clip: true
                 font.pixelSize: 25
                 selectByMouse: true
                 verticalAlignment: TextInput.AlignVCenter
                 onEditingFinished: bingDictionary(text)
+                text: https.getSearchContent()
             }
 
         }
@@ -131,52 +133,6 @@ Window {
             }
 
             target: https
-        }
-
-        Connections {
-            function onAlt4S() {
-                mainWindow.hide();
-                mainWindow.x = (Screen.desktopAvailableWidth - width) / 2;
-                mainWindow.y = (Screen.desktopAvailableHeight - height) / 2;
-                textInput.selectAll();
-                mainWindow.show();
-            }
-
-            target: gsf
-        }
-
-        Connections {
-            function onAlt4A() {
-                mainWindow.hide();
-                mainWindow.x = (Screen.desktopAvailableWidth - width) / 2;
-                mainWindow.y = (Screen.desktopAvailableHeight - height) / 2;
-                textInput.selectAll();
-                textInput.paste();
-                mainWindow.show();
-            }
-
-            target: gsf
-        }
-
-        Connections {
-            function onAlt4Z() {
-                process.xclip_o_sel();
-            }
-
-            target: gsf
-        }
-
-        Connections {
-            function onXclip_o_sel_finished(word) {
-                mainWindow.hide();
-                mainWindow.x = (Screen.desktopAvailableWidth - width) / 2;
-                mainWindow.y = (Screen.desktopAvailableHeight - height) / 2;
-                textInput.text = word;
-                textInput.editingFinished();
-                mainWindow.show();
-            }
-
-            target: process
         }
 
         Shortcut {

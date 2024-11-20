@@ -1,8 +1,5 @@
 TEMPLATE = subdirs
 
-SUBDIRS = simdict xclip
+SUBDIRS = simdict
 
 simdict.file = simdict/simdict.pro
-xclip.file = xclip/xclip.pro
-
-simdict.depends = xclip
