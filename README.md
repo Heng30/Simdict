@@ -3,11 +3,8 @@
 ### 功能
 - https://cn.bing.com/dict 翻译功能
 - Ctrl+Q: 退出程序
-- Alt+S: 显示程序(全局快捷键)
-- Alt+A: 系统粘贴板取词翻译
-- 双击选中单词, Alt+Z翻译选中的单词
+- Esc: 退出程序
 - Tab: 选中输入框的单词
-- Esc: 隐藏程序
 
 ### 目的
 - 在linux下找到一个好用的翻译工具不容易, 之前一直使用goldendict外挂python脚本进行翻译,
