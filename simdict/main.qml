@@ -12,6 +12,20 @@ Window {
         https.get();
     }
 
+    function log(content) {
+        var sp = 'text-indent:0px;">';
+        var ep = '</p></body></html>';
+        var list1 = content.split(sp);
+        if (list1.length < 2)
+            return ;
+
+        var list2 = list1[1].split(ep);
+        if (list2.length < 1)
+            return ;
+
+        console.log(list2[0]);
+    }
+
     function parseHtml(content) {
         var html = content.toString();
         var sp = '<meta name="description" content="';
@@ -27,6 +41,7 @@ Window {
             return ;
         }
         outputText.text = list2[0];
+        log(outputText.text);
     }
 
     Component.onCompleted: {
